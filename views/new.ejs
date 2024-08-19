@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <title>New message</title>
+</head>
+
+<body>
+  <%- include('home') %>
+  <form action="/new" method="POST" class="message-form">
+    <h1>New message</h1>
+    <label for="user">User:</label>
+    <input type="text" id="user" name="user" size="30" required>
+
+    <label for="message">Message:</label>
+    <textarea type="text" id="message" name="text" rows="5" cols="30" required></textarea>
+    <button type="submit" class="send-btn">Send</button>
+  </form>
+</body>
+
+</html>

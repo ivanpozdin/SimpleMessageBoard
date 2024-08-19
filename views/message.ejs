@@ -1,0 +1,7 @@
+<li class="message" id="<%= id%>" onclick="location.href = 'http://localhost:3000/message/<%= id%>';">
+  <div class="message-head">
+    <h3 class="user"><%= message.user %></h3>
+    <p class="added"><%= message.added.toLocaleString() %></p>
+  </div>
+  <p class="text"><%= message.text %></p>
+</li>
