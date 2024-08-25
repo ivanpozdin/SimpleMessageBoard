@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("node:path");
@@ -18,5 +19,5 @@ app.post("/new", controller.postNew);
 
 app.get("/message/:id", controller.setBaseURL, controller.getMessage);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Started listening on PORT: ${PORT}`));

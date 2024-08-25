@@ -14,7 +14,7 @@
   <a href="/new" class="write-btn">write</a>
   <ul class="message-list">
     <% for( let i = messages.length-1; i >= 0; i-- ) { %>
-    <%- include('message', {message: messages[i], id: i}) %>
+    <%- include('message', {message: messages[i]}) %>
     <% } %>
   </ul>
 </body>

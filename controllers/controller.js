@@ -1,4 +1,4 @@
-const { messages } = require("../model/messages");
+const db = require("../db/queries");
 
 exports.setBaseURL = (req, res, next) => {
   const protocol = req.protocol;
@@ -13,7 +13,12 @@ exports.setBaseURL = (req, res, next) => {
   next();
 };
 
-exports.getHome = (req, res) => {
+exports.getHome = async (req, res) => {
+  let messages = await db.getAllMessages();
+  messages = messages.map((message) => {
+    return { ...message, user: message.username };
+  });
+
   res.render("index", { messages });
 };
 
@@ -21,16 +26,18 @@ exports.getNew = (req, res) => {
   res.render("new");
 };
 
-exports.postNew = (req, res) => {
+exports.postNew = async (req, res) => {
   const { user, text } = req.body;
-  const newMessage = { text, user, added: new Date() };
-  messages.push(newMessage);
+
+  await db.addMessage(user, text);
+
   res.redirect("/");
 };
 
-exports.getMessage = (req, res) => {
-  const i = parseInt(req.params.id);
-  const message = messages[i];
+exports.getMessage = async (req, res) => {
+  const id = parseInt(req.params.id);
 
-  res.render("message-page", { message, id: i });
+  let message = await db.getMessageById(id);
+  message = { ...message, user: message.username };
+  res.render("message-page", { message });
 };
